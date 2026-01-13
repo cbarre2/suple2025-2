@@ -1,0 +1,18 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Actualizar Salario de Empleado</h2>
+  <form (ngSubmit)="actualizar()">
+    <div class="mb-3">
+      <label class="form-label">ID del Empleado</label>
+      <input [(ngModel)]="idEmpleado" name="idEmpleado" type="number" class="form-control" required>
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Nuevo Salario</label>
+      <input [(ngModel)]="nuevoSalario" name="nuevoSalario" type="number" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-warning">Actualizar</button>
+  </form>
+
+  <div *ngIf="mensaje" class="alert alert-info mt-3">
+    {{ mensaje }}
+  </div>
+</div>

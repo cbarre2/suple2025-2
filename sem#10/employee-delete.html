@@ -1,0 +1,14 @@
+<div class="container mt-4">
+  <h2 class="mb-3">Eliminar Empleado</h2>
+  <form (ngSubmit)="eliminar()">
+    <div class="mb-3">
+      <label class="form-label">ID del Empleado</label>
+      <input [(ngModel)]="idEmpleado" name="idEmpleado" type="number" class="form-control" required>
+    </div>
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+  </form>
+
+  <div *ngIf="mensaje" class="alert mt-3" [ngClass]="{ 'alert-success': exito, 'alert-danger': !exito }">
+    {{ mensaje }}
+  </div>
+</div>
