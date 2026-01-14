@@ -40,7 +40,7 @@ form: FormGroup;
       next: (user) => {
         this.usuarioExiste = true;
         this.buscando = false;
-        this.nombreUsuario = user.nombre; // Mostramos el nombre para confirmar
+        this.nombreUsuario = user.nombre;
       },
       error: () => {
         this.usuarioExiste = false;
