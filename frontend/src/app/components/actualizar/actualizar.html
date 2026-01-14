@@ -1,60 +1,59 @@
-<div style="padding: 20px;">
+<div class="container-fluid mt-4">
 
   <div *ngIf="authService.esAdmin()">
-    <h2>Actualizar Producto</h2>
+    <h2 class="mb-4">Actualizar Producto</h2>
 
-    <form [formGroup]="miFormulario" (ngSubmit)="actualizar()">
-      <table border="0" cellpadding="8">
-        <tr>
-          <td><label>Nombre:</label></td>
-          <td><input type="text" formControlName="nombre"></td>
-        </tr>
-        
-        <tr>
-          <td><label>Categoría (Tipo):</label></td>
-          <td>
-            <select formControlName="tipo">
-              <option value="">-- Seleccione --</option>
-              <option value="Normal">Normal</option>
-              <option value="Viajes">Viajes</option>
-            </select>
-          </td>
-        </tr>
+    <form [formGroup]="miFormulario" (ngSubmit)="actualizar()" style="max-width: 400px;">
+      
+      <div class="mb-3">
+        <label class="form-label">Nombre:</label>
+        <input type="text" formControlName="nombre" class="form-control">
+      </div>
 
-        <tr>
-          <td><label>Stock:</label></td>
-          <td><input type="number" formControlName="stock"></td>
-        </tr>
-        <tr>
-          <td><label>Precio Compra:</label></td>
-          <td><input type="number" formControlName="precio_compra"></td>
-        </tr>
-        <tr>
-          <td><label>Precio Venta:</label></td>
-          <td><input type="number" formControlName="precio_venta"></td>
-        </tr>
+      <div class="mb-3">
+        <label class="form-label">Categoría (Tipo):</label>
+        <select formControlName="tipo" class="form-select">
+          <option value="">-- Seleccione --</option>
+          <option value="Normal">Normal</option>
+          <option value="Viajes">Viajes</option>
+        </select>
+      </div>
 
-        <tr *ngIf="miFormulario.get('tipo')?.value === 'Viajes'">
-          <td><label>Anticipo:</label></td>
-          <td><input type="number" formControlName="anticipo"></td>
-        </tr>
+      <div class="mb-3">
+        <label class="form-label">Stock:</label>
+        <input type="number" formControlName="stock" class="form-control">
+      </div>
 
-        <tr>
-          <td colspan="2" style="padding-top: 20px;">
-            <button type="submit" [disabled]="miFormulario.invalid">
-              Guardar Cambios
-            </button>
-            <button type="button" routerLink="/listar" style="margin-left: 10px;">
-              Cancelar
-            </button>          
-          </td>
-        </tr>
-      </table>
+      <div class="mb-3">
+        <label class="form-label">Precio Compra:</label>
+        <input type="number" formControlName="precio_compra" class="form-control">
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label">Precio Venta:</label>
+        <input type="number" formControlName="precio_venta" class="form-control">
+      </div>
+
+      <div class="mb-3" *ngIf="miFormulario.get('tipo')?.value === 'Viajes'">
+        <label class="form-label">Anticipo:</label>
+        <input type="number" formControlName="anticipo" class="form-control">
+      </div>
+
+      <div class="mt-4">
+        <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
+          Guardar Cambios
+        </button>
+        <button type="button" routerLink="/listar" class="btn btn-secondary ms-2">
+          Cancelar
+        </button>
+      </div>
+
     </form>
   </div>
 
   <div *ngIf="!authService.esAdmin()">
-    <h2>Acceso Denegado</h2>
     <p>Solo el administrador puede actualizar productos.</p>
+    <hr>
   </div>
+
 </div>

@@ -1,16 +1,19 @@
-<div>
-  <h2>Lista de Productos</h2>
+<div class="container mt-4">
+  <h2 class="mb-3">Lista de Productos</h2>
 
-  <div>
+  <div class="mb-3">
     <input 
-      type="text"   [(ngModel)]="busqueda"  (input)="buscar()"  placeholder="Buscar por nombre, tipo, precio venta ">
+      type="text" 
+      class="form-control" 
+      [(ngModel)]="busqueda" 
+      (input)="buscar()" 
+      placeholder="Buscar por nombre, tipo, precio venta...">
   </div>
 
-  <br>
-  <table border="1" style="border-collapse: collapse;">
-    <thead>
+  <table class="table table-striped table-hover table-bordered">
+    <thead class="table-primary">
       <tr>
-        <th>Codigo</th>
+        <th>Código</th>
         <th>Nombre</th>
         <th>Categoría</th>
         <th>Stock</th>
@@ -25,19 +28,21 @@
         <td>{{ pro.codigo }}</td>
         <td>{{ pro.nombre }}</td>
         <td>{{ pro.tipo }}</td>
-        <td>{{ pro.stock }}</td>
+        <td>{{ pro.stock }}
+        </td>
         <td *ngIf="authService.esAdmin()">$ {{ pro.precio_compra }}</td>
-
         <td>$ {{ pro.precio_venta }}</td>
         <td>$ {{ pro.anticipo }}</td>
         
         <td *ngIf="authService.esAdmin()">
-          <button (click)="irAEditar(pro.codigo!)">Modificar</button>
-          <button (click)="eliminar(pro.codigo!)">Eliminar</button>
+          <button class="btn btn-primary btn-sm me-2" (click)="irAEditar(pro.codigo!)">Modificar</button>
+          <button class="btn btn-secondary btn-sm" (click)="eliminar(pro.codigo!)">Eliminar</button>
         </td>
       </tr>
     </tbody>
   </table>
 
-  <p *ngIf="productos.length === 0">No hay productos registrados.</p>
+  <div *ngIf="productos.length === 0" class="alert alert-warning">
+    No hay productos registrados.
+  </div>
 </div>
