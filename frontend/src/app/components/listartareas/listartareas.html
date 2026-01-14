@@ -1,0 +1,38 @@
+<div class="container mt-4">
+  <h3> Tareas</h3>
+
+  <div class="mb-4" style="max-width: 300px;">
+    <div class="input-group">
+      <input type="number" [(ngModel)]="idUsuario" class="form-control" placeholder="ID Usuario">
+      <button (click)="cargarTareas()" class="btn btn-dark">Buscar</button>
+    </div>
+  </div>
+
+  <table class="table table-sm table-bordered">
+    <thead class="table-light">
+      <tr>
+        <th>ID Usuario</th>
+        <th>Título</th>
+        <th>Estado</th>
+        <th>Botones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let t of tareas">
+        <td>{{ t.id_usuario }}</td>
+        <td>{{ t.titulo }}</td>
+        <td>
+            {{ t.estado }}
+        </td>
+        <td>
+          <button (click)="cambiarEstado(t)" class="btn btn-primary btn-sm me-1">Actualizar Estado</button>
+          <button (click)="eliminar(t.id_tarea)" class="btn btn-danger btn-sm">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="tareas.length === 0" >
+    No se encontraron tareas para el usuario {{idUsuario}}.
+  </div>
+</div>

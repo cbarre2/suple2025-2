@@ -1,0 +1,39 @@
+<div class="container-fluid mt-4">
+  <h2 class="mb-4"> Nueva Tarea</h2>
+
+  <form [formGroup]="form" (ngSubmit)="enviar()">
+    
+    <div class="mb-3">
+      <label class="form-label">ID del Usuario:</label>
+      <input type="number" formControlName="id_usuario" class="form-control w-50" (change)="validarUsuario()">
+      
+      <div class="mt-1">
+        <small *ngIf="buscando" class="text-info">Buscando...</small>
+        <small *ngIf="usuarioExiste" >Usuario {{nombreUsuario}}</small>
+        <small *ngIf="!usuarioExiste && form.get('id_usuario')?.touched && !buscando" class="text-danger d-block">
+          El usuario no existe en el sistema.
+        </small>
+      </div>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Título de la Tarea:</label>
+      <input type="text" formControlName="titulo" class="form-control w-50">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Descripción:</label>
+      <textarea formControlName="descripcion" class="form-control w-50" rows="3"></textarea>
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid || !usuarioExiste">
+        Guardar Tarea
+      </button>
+      <button type="button" routerLink="/listar" class="btn btn-secondary ms-2">
+        Cancelar
+      </button>
+    </div>
+
+  </form>
+</div>
