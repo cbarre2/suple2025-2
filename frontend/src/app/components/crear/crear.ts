@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { ProductoService } from '../../services/productos';
-import { AuthService } from '../../services/AuthService';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
+import { UsuarioService } from '../../services/usuario';
 
 @Component({
   selector: 'app-crear',
@@ -17,62 +16,32 @@ export class CrearComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private service: ProductoService,
-    private router: Router,
-    public authService: AuthService
+    private service: UsuarioService,
+    private router: Router
   ) { }
 
 ngOnInit() {
   this.form = this.fb.group({
     nombre: ['', Validators.required],
-    tipo: ['Normal', Validators.required],
-    stock: [0, Validators.min(1)],
-    precio_compra: [0, Validators.min(1)],
-    precio_venta: [0, Validators.min(1)],
-    anticipo: [0]
+    correo: ['', [Validators.required, Validators.email]] 
   });
 }
 
   enviar() {
     let datos = this.form.value;
     if (!datos.nombre || datos.nombre.trim() === '') {
-      alert("Ingrese nombre de producto");
-      return;
-    }
-    // Validar que el tipo no esté vacío
-    if (!datos.tipo || datos.tipo.trim() === '') {
-      alert("Seleccione tipo de producto");
+      alert("Ingrese nombre de usuario");
       return;
     }
 
-    if (datos.stock <= 0) {
-      alert("Ingrese stock mayor a 0");
-      return;
-    }
-
-      if (datos.precio_compra <= 0) {
-      alert("Ingrese precio de compra mayor a 0");
-      return;
-    }
-
-    if (datos.precio_venta <= 0) {
-      alert("Ingrese precio de venta mayor a 0 y mayor a precio de compra");
-      return;
-    }
-
-    //  Validar los precios
-    if (datos.precio_venta <= datos.precio_compra) {
-      alert("El precio de venta debe ser más alto que el de compra");
-      return;
-    }
-
-    if (datos.tipo === 'Viajes' && (!datos.anticipo || datos.anticipo <= 0)) {
-    alert("Para viajes, el anticipo debe ser mayor a 0");
+ if (!datos.correo || datos.correo.trim() === '') {
+    alert("Ingrese un correo electrónico");
     return;
   }
-  
+
+
     this.service.insertar(datos).subscribe(() => {
-      alert("Producto Guardado");
+      alert("Usuario Guardado");
       this.router.navigate(['/listar']);
     });
   }

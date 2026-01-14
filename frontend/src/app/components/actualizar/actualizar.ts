@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductoService } from '../../services/productos';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { AuthService } from '../../services/AuthService';
+import { UsuarioService } from '../../services/usuario';
 
 @Component({
   selector: 'app-actualizar',
@@ -13,29 +12,24 @@ import { AuthService } from '../../services/AuthService';
 })
 export class ActualizarComponents implements OnInit {
   miFormulario!: FormGroup;
-  id!: number;
+  id_usuario!: number;
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,        
-    private productoService: ProductoService,
-    public authService: AuthService
+    private productoService: UsuarioService
   ) {}
 
   ngOnInit() {
-    this.id = Number(this.route.snapshot.paramMap.get('id'));
+    this.id_usuario = Number(this.route.snapshot.paramMap.get('id'));
 
     this.miFormulario = this.fb.group({
       nombre: ['', [Validators.required, Validators.minLength(3)]],
-      tipo: ['', Validators.required],
-      stock: [0, [Validators.required, Validators.min(1)]],
-      precio_compra: [0, [Validators.required, Validators.min(0.01)]],
-      precio_venta: [0, [Validators.required, Validators.min(0.01)]],
-      anticipo: ['']
+      correo: ['', [Validators.required, Validators.email]]
     });
 
-    this.productoService.getPorId(this.id).subscribe({
+    this.productoService.getById(this.id_usuario).subscribe({
       next: (prod) => {
         this.miFormulario.patchValue(prod);
       },
@@ -50,23 +44,19 @@ export class ActualizarComponents implements OnInit {
   }
 
   let datos = this.miFormulario.value;
+  if (!datos.nombre || datos.nombre.trim() === '') {
+      alert("Ingrese nombre de usuario");
+      return;
+    }
 
-  // Validar precios
-  if (Number(datos.precio_venta) <= Number(datos.precio_compra)) {
-    alert("La venta debe ser mayor a la compra");
+ if (!datos.correo || datos.correo.trim() === '') {
+    alert("Ingrese un correo electrónico");
     return;
   }
 
-  if (datos.tipo !== 'Viajes') {
-    datos.anticipo = '0'; 
-  }
 
-     if (datos.tipo === 'Viajes' && (!datos.anticipo || datos.anticipo <= 0)) {
-    alert("Para viajes, el anticipo debe ser mayor a 0");
-    return;
-  }
   
-  this.productoService.actualizar(this.id, datos).subscribe(res => {
+  this.productoService.actualizar(this.id_usuario, datos).subscribe(res => {
     alert("Actualizado");
     this.router.navigate(['/listar']);
   }, err => {

@@ -1,9 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../services/AuthService';
-import { Producto, ProductoService } from '../../services/productos';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../../services/usuario';
 
 @Component({
   selector: 'app-listar',
@@ -12,37 +11,24 @@ import { Router } from '@angular/router';
   styleUrl: './listar.css',
 })
 export class ListarComponent implements OnInit {
-  productos: any[] = [];
-  filtrados: any[] = [];
-  busqueda: string = '';
+  usuarios: any[] = [];
 
   constructor(
-    private service: ProductoService, 
-    public authService: AuthService,
+    private service: UsuarioService,
     private router: Router
   ) { }
 
   ngOnInit() {
-    this.service.getTodos().subscribe(res => {
-      this.productos = res;
-      this.filtrados = res;
+    this.service.getAll().subscribe(res => {
+      this.usuarios = res;
     });
   }
 
-  //buscar pro nombre, tipo, precio venta
-  buscar() {
-    this.filtrados = this.productos.filter(p =>
-      p.nombre.toLowerCase().includes(this.busqueda.toLowerCase()) ||
-      p.tipo.toLowerCase().includes(this.busqueda.toLowerCase()) ||
-       p.precio_venta.toString().includes(this.busqueda.toLowerCase())
-    );
-  }
-
+  
   eliminar(id: any) {
     if (confirm("¿Seguro?")) {
       this.service.eliminar(id).subscribe(() => {
-        this.productos = this.productos.filter(p => p.codigo !== id);
-        this.buscar();
+        this.usuarios = this.usuarios.filter(p => p.id_usuario !== id);
         alert("Eliminado");
       });
     }

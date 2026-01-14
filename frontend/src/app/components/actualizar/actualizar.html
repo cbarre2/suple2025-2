@@ -1,6 +1,5 @@
 <div class="container-fluid mt-4">
 
-  <div *ngIf="authService.esAdmin()">
     <h2 class="mb-4">Actualizar Producto</h2>
 
     <form [formGroup]="miFormulario" (ngSubmit)="actualizar()" style="max-width: 400px;">
@@ -10,34 +9,13 @@
         <input type="text" formControlName="nombre" class="form-control">
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Categoría (Tipo):</label>
-        <select formControlName="tipo" class="form-select">
-          <option value="">-- Seleccione --</option>
-          <option value="Normal">Normal</option>
-          <option value="Viajes">Viajes</option>
-        </select>
+    <div class="mb-3">
+      <label class="form-label">Correo:</label>
+      <input type="email" formControlName="correo" class="form-control">
+      <div *ngIf="miFormulario.get('correo')?.errors?.['email'] && miFormulario.get('correo')?.touched" class="text-danger small">
+        Formato de correo no válido.
       </div>
-
-      <div class="mb-3">
-        <label class="form-label">Stock:</label>
-        <input type="number" formControlName="stock" class="form-control">
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Precio Compra:</label>
-        <input type="number" formControlName="precio_compra" class="form-control">
-      </div>
-
-      <div class="mb-3">
-        <label class="form-label">Precio Venta:</label>
-        <input type="number" formControlName="precio_venta" class="form-control">
-      </div>
-
-      <div class="mb-3" *ngIf="miFormulario.get('tipo')?.value === 'Viajes'">
-        <label class="form-label">Anticipo:</label>
-        <input type="number" formControlName="anticipo" class="form-control">
-      </div>
+    </div>
 
       <div class="mt-4">
         <button type="submit" class="btn btn-primary" [disabled]="miFormulario.invalid">
@@ -50,10 +28,3 @@
 
     </form>
   </div>
-
-  <div *ngIf="!authService.esAdmin()">
-    <p>Solo el administrador puede actualizar productos.</p>
-    <hr>
-  </div>
-
-</div>

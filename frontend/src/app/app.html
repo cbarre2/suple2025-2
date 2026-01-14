@@ -7,16 +7,12 @@
       <li class="nav-item mb-2">
         <a routerLink="/listar" class="nav-link text-white">Listar</a>
       </li>
-      
-      <li class="nav-item mb-2" *ngIf="authService.esAdmin()"> 
+        <li class="nav-item mb-2">
         <a routerLink="/crear" class="nav-link text-white">Crear</a>
       </li>
     </ul>
 
     <hr>
-    <button (click)="salir()" class="btn btn-danger w-100">
-      Cerrar Sesión
-    </button>
   </nav>
 
   <main class="p-4 flex-fill">
