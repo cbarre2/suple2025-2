@@ -1,0 +1,29 @@
+<div class="d-flex" *ngIf="router.url !== '/login'">
+  
+  <nav class="sidebar bg-dark text-white p-3 vh-100 d-flex flex-column">
+    <h4 class="mb-4">Menú</h4>
+    
+    <ul class="nav flex-column mb-auto">
+      <li class="nav-item mb-2">
+        <a routerLink="/listar" class="nav-link text-white">Listar</a>
+      </li>
+      
+      <li class="nav-item mb-2" *ngIf="authService.esAdmin()"> 
+        <a routerLink="/crear" class="nav-link text-white">Crear</a>
+      </li>
+    </ul>
+
+    <hr>
+    <button (click)="salir()" class="btn btn-danger w-100">
+      Cerrar Sesión
+    </button>
+  </nav>
+
+  <main class="p-4 flex-fill">
+    <router-outlet></router-outlet>
+  </main>
+</div>
+
+<div *ngIf="router.url === '/login'">
+  <router-outlet></router-outlet>
+</div>

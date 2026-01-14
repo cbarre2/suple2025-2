@@ -1,0 +1,60 @@
+<div style="padding: 20px;">
+
+  <div *ngIf="authService.esAdmin()">
+    <h2>Actualizar Producto</h2>
+
+    <form [formGroup]="miFormulario" (ngSubmit)="actualizar()">
+      <table border="0" cellpadding="8">
+        <tr>
+          <td><label>Nombre:</label></td>
+          <td><input type="text" formControlName="nombre"></td>
+        </tr>
+        
+        <tr>
+          <td><label>Categoría (Tipo):</label></td>
+          <td>
+            <select formControlName="tipo">
+              <option value="">-- Seleccione --</option>
+              <option value="Normal">Normal</option>
+              <option value="Viajes">Viajes</option>
+            </select>
+          </td>
+        </tr>
+
+        <tr>
+          <td><label>Stock:</label></td>
+          <td><input type="number" formControlName="stock"></td>
+        </tr>
+        <tr>
+          <td><label>Precio Compra:</label></td>
+          <td><input type="number" formControlName="precio_compra"></td>
+        </tr>
+        <tr>
+          <td><label>Precio Venta:</label></td>
+          <td><input type="number" formControlName="precio_venta"></td>
+        </tr>
+
+        <tr *ngIf="miFormulario.get('tipo')?.value === 'Viajes'">
+          <td><label>Anticipo:</label></td>
+          <td><input type="number" formControlName="anticipo"></td>
+        </tr>
+
+        <tr>
+          <td colspan="2" style="padding-top: 20px;">
+            <button type="submit" [disabled]="miFormulario.invalid">
+              Guardar Cambios
+            </button>
+            <button type="button" routerLink="/listar" style="margin-left: 10px;">
+              Cancelar
+            </button>          
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+
+  <div *ngIf="!authService.esAdmin()">
+    <h2>Acceso Denegado</h2>
+    <p>Solo el administrador puede actualizar productos.</p>
+  </div>
+</div>

@@ -1,0 +1,44 @@
+<div style="padding: 20px;">
+
+  <div *ngIf="authService.esAdmin()">
+    <h2>Nuevo Producto</h2>
+
+    <form [formGroup]="form" (ngSubmit)="enviar()">
+      <p>Nombre: <br>
+        <input type="text" formControlName="nombre">
+      </p>
+
+      <p>Tipo: <br>
+        <select formControlName="tipo">
+          <option value="Normal">Normal</option>
+          <option value="Viajes">Viajes</option>
+        </select>
+      </p>
+
+      <p>Stock: <br>
+        <input type="number" formControlName="stock">
+      </p>
+
+      <p>Precio Compra: <br>
+        <input type="number" formControlName="precio_compra">
+      </p>
+
+      <p>Precio Venta: <br>
+        <input type="number" formControlName="precio_venta">
+      </p>
+
+      <div *ngIf="form.get('tipo')?.value === 'Viajes'">
+        <p>Anticipo: <br>
+          <input type="number" formControlName="anticipo">
+        </p>
+      </div>
+
+      <button type="submit">Guardar</button>
+      <button type="button" routerLink="/listar">Cancelar</button>
+    </form>
+  </div>
+
+  <div *ngIf="!authService.esAdmin()">
+    <p>Solo el administrador puede crear productos.</p>
+  </div>
+</div>

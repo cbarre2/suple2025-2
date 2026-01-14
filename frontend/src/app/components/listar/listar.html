@@ -1,0 +1,43 @@
+<div>
+  <h2>Lista de Productos</h2>
+
+  <div>
+    <input 
+      type="text"   [(ngModel)]="busqueda"  (input)="buscar()"  placeholder="Buscar por nombre, tipo, precio venta ">
+  </div>
+
+  <br>
+  <table border="1" style="border-collapse: collapse;">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Nombre</th>
+        <th>Categoría</th>
+        <th>Stock</th>
+        <th *ngIf="authService.esAdmin()">Compra</th>
+        <th>Venta</th>
+        <th>Anticipo</th>
+        <th *ngIf="authService.esAdmin()">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let pro of filtrados">
+        <td>{{ pro.codigo }}</td>
+        <td>{{ pro.nombre }}</td>
+        <td>{{ pro.tipo }}</td>
+        <td>{{ pro.stock }}</td>
+        <td *ngIf="authService.esAdmin()">$ {{ pro.precio_compra }}</td>
+
+        <td>$ {{ pro.precio_venta }}</td>
+        <td>$ {{ pro.anticipo }}</td>
+        
+        <td *ngIf="authService.esAdmin()">
+          <button (click)="irAEditar(pro.codigo!)">Modificar</button>
+          <button (click)="eliminar(pro.codigo!)">Eliminar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="productos.length === 0">No hay productos registrados.</p>
+</div>
