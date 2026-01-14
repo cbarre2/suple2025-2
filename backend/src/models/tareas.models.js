@@ -8,6 +8,11 @@ exports.findAllByUsuario = async (id_usuario) => {
   return result.rows;
 };
 
+exports.findById = async (id) => {
+  const result = await db.query('SELECT * FROM tareas WHERE id_tarea = $1', [id]);
+  return result.rows[0];
+};
+
 exports.insert = async ({ titulo, descripcion, id_usuario }) => {
   const result = await db.query(
     'INSERT INTO tareas (titulo, descripcion, id_usuario) VALUES ($1, $2, $3) RETURNING *',

@@ -9,6 +9,16 @@ exports.getByUsuario = async (req, res) => {
   }
 };
 
+exports.getById = async (req, res) => {
+  try {
+    const data = await service.getById(req.params.id);
+    if (!data) return res.status(404).json({ error: 'Tarea no encontrada' });
+    res.json(data);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};
+
 exports.create = async (req, res) => {
   try {
     const data = await service.create(req.body);

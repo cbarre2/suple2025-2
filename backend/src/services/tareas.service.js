@@ -4,6 +4,10 @@ exports.getByUsuario = async (id_usuario) => {
   return await model.findAllByUsuario(id_usuario);
 };
 
+exports.getById = async (id) => {
+  return await model.findById(id);
+};
+
 exports.create = async (data) => {
   return await model.insert(data);
 };

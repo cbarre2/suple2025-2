@@ -24,10 +24,14 @@
         <td>
             {{ t.estado }}
         </td>
-        <td>
-          <button (click)="cambiarEstado(t)" class="btn btn-primary btn-sm me-1">Actualizar Estado</button>
-          <button (click)="eliminar(t.id_tarea)" class="btn btn-danger btn-sm">Eliminar</button>
-        </td>
+       <td>
+  <button [routerLink]="['/editartarea', t.id_tarea]" class="btn btn-warning btn-sm me-1">
+  Editar
+</button>
+  
+  <button (click)="cambiarEstado(t)" class="btn btn-primary btn-sm me-1">Actualizar Estado</button>
+  <button (click)="eliminar(t.id_tarea)" class="btn btn-danger btn-sm">Eliminar</button>
+</td>
       </tr>
     </tbody>
   </table>

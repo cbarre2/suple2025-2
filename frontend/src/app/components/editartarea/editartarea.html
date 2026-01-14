@@ -1,1 +1,29 @@
-<p>editartarea works!</p>
+<div class="container-fluid mt-4">
+  <h2 class="mb-4">Editar Tarea</h2>
+
+  <form [formGroup]="form" (ngSubmit)="enviar()">
+    
+    <div class="mb-3">
+      <label class="form-label">Título:</label>
+      <input type="text" formControlName="titulo" class="form-control w-50">
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Descripción:</label>
+      <textarea formControlName="descripcion" class="form-control w-50"></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label class="form-label">Estado:</label>
+      <select formControlName="estado" class="form-select w-50">
+        <option value="PENDIENTE">PENDIENTE</option>
+        <option value="COMPLETADA">COMPLETADA</option>
+      </select>
+    </div>
+
+    <div class="mt-4">
+      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar Cambios</button>
+    </div>
+
+  </form>
+</div>

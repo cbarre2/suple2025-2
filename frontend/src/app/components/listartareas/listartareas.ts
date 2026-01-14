@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../services/tareas';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-listartareas',
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, RouterLink],
   templateUrl: './listartareas.html',
   styleUrl: './listartareas.css',
 })
