@@ -22,16 +22,16 @@ export class CrearComponent implements OnInit {
     public authService: AuthService
   ) { }
 
-  ngOnInit() {
-    this.form = this.fb.group({
-      nombre: [''],
-      tipo: [''],
-      stock: [0],
-      precio_compra: [0],
-      precio_venta: [0],
-      anticipo: [0]
-    });
-  }
+ngOnInit() {
+  this.form = this.fb.group({
+    nombre: ['', Validators.required],
+    tipo: ['Normal', Validators.required],
+    stock: [0, Validators.min(1)],
+    precio_compra: [0, Validators.min(1)],
+    precio_venta: [0, Validators.min(1)],
+    anticipo: [0]
+  });
+}
 
   enviar() {
     let datos = this.form.value;
