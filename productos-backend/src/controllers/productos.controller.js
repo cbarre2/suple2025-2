@@ -1,8 +1,8 @@
-const service = require('../services/employee.service');
+const service = require('../services/productos.service');
 
 exports.getAll = async (req, res) => {
   try {
-    const data = await service.getAllEmployees();
+    const data = await service.getAll();
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -11,8 +11,8 @@ exports.getAll = async (req, res) => {
 
 exports.getById = async (req, res) => {
   try {
-    const data = await service.getEmployeeById(req.params.id);
-    if (!data) return res.status(404).json({ error: 'Empleado no encontrado' });
+    const data = await service.getById(req.params.id);
+    if (!data) return res.status(404).json({ error: 'Producto no encontrado' });
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -21,7 +21,7 @@ exports.getById = async (req, res) => {
 
 exports.create = async (req, res) => {
   try {
-    const data = await service.createEmployee(req.body);
+    const data = await service.create(req.body);
     res.status(201).json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -30,7 +30,7 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const data = await service.updateEmployee(req.params.id, req.body);
+    const data = await service.update(req.params.id, req.body);
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -39,8 +39,8 @@ exports.update = async (req, res) => {
 
 exports.remove = async (req, res) => {
   try {
-    await service.deleteEmployee(req.params.id);
-    res.json({ message: 'Empleado eliminado' });
+    await service.delete(req.params.id);
+    res.json({ message: 'Producto eliminado' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }
