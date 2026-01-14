@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { TareaService } from '../../services/tareas';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UsuarioService } from '../../services/usuario';
 
 @Component({
   selector: 'app-creartarea',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './creartarea.html',
   styleUrl: './creartarea.css',
 })

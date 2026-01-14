@@ -21,9 +21,15 @@
       </select>
     </div>
 
-    <div class="mt-4">
-      <button type="submit" class="btn btn-primary" [disabled]="form.invalid">Guardar Cambios</button>
-    </div>
+   <div class="mt-4">
+  <button type="submit" class="btn btn-primary" [disabled]="form.invalid">
+    Guardar Cambios
+  </button>
+  
+  <button type="button" class="btn btn-secondary ms-2" routerLink="/tareas/:id_usuario">
+    Cancelar
+  </button>
+</div>
 
   </form>
 </div>
