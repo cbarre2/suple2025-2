@@ -31,6 +31,10 @@ import { Observable } from 'rxjs';
 //     return this.http.post<Producto>(this.API_URL, producto);
 //   }
 
+// actualizar(codigo: number, producto: Producto): Observable<Producto> {
+//     return this.http.put<Producto>(`${this.API_URL}/${codigo}`, producto);
+//   }
+
 //   // 3. Eliminar un producto por código
 //   eliminar(codigo: number): Observable<any> {
 //     return this.http.delete(`${this.API_URL}/${codigo}`);
