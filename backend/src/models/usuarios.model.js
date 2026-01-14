@@ -11,9 +11,7 @@ exports.findById = async (id) => {
 };
 
 exports.insert = async ({ nombre, correo }) => {
-  // if (precio_venta <= precio_compra) {
-  //   throw new Error("El precio de venta debe ser superior al de compra");
-  // }
+  
   const result = await db.query(
     'INSERT INTO usuarios (nombre, correo) VALUES ($1, $2) RETURNING *',
     [nombre, correo]

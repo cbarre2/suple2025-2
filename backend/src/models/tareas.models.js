@@ -33,7 +33,6 @@ exports.remove = async (id) => {
   await db.query('DELETE FROM tareas WHERE id_tarea = $1', [id]);
 };
 
-// Método especial para cambiar solo el estado
 exports.updateStatus = async (id, estado) => {
   const result = await db.query(
     'UPDATE tareas SET estado = $1 WHERE id_tarea = $2 RETURNING *',
