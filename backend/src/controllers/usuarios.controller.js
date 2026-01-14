@@ -1,4 +1,4 @@
-const service = require('../services/productos.service');
+const service = require('../services/usuarios.service');
 
 exports.getAll = async (req, res) => {
   try {
@@ -12,7 +12,7 @@ exports.getAll = async (req, res) => {
 exports.getById = async (req, res) => {
   try {
     const data = await service.getById(req.params.id);
-    if (!data) return res.status(404).json({ error: 'Producto no encontrado' });
+    if (!data) return res.status(404).json({ error: 'Usuario no encontrado' });
     res.json(data);
   } catch (err) {
     res.status(500).json({ error: err.message });
@@ -40,7 +40,7 @@ exports.update = async (req, res) => {
 exports.remove = async (req, res) => {
   try {
     await service.delete(req.params.id);
-    res.json({ message: 'Producto eliminado' });
+    res.json({ message: 'Usuario eliminado' });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -1,4 +1,4 @@
-const model = require('../models/productos.model');
+const model = require('../models/usuarios.model');
 
 exports.getAll= async () => {
   return await model.findAll();
