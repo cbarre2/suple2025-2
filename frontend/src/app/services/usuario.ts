@@ -36,7 +36,7 @@ actualizar(codigo: number, producto: Usuario): Observable<Usuario> {
     return this.http.put<Usuario>(`${this.API_URL}/${codigo}`, producto);
   }
 
-  // 3. Eliminar por código
+  //  Eliminar por código
   eliminar(codigo: number): Observable<any> {
     return this.http.delete(`${this.API_URL}/${codigo}`);
   }
